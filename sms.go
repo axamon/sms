@@ -5,8 +5,17 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"regexp"
 	"strings"
 )
+
+//Verificacellulare si assicura che il cellulare inserito sia nel formato corretto
+func Verificacellulare(CELLULARE string) (ok bool) {
+
+	re := regexp.MustCompile(`^\+3[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$`)
+	return re.MatchString(CELLULARE)
+
+}
 
 //Quanto sono compliant con almeno alcune delle 12 best practices di GO!
 //https://talks.golang.org/2013/bestpractices.slide#1

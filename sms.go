@@ -27,7 +27,14 @@ func recuperavariabile(variabile string) (result string, err error) {
 }
 
 //Inviasms invia sms via Twilio
-func Inviasms(to, from, body string) {
+func Inviasms(to, body string) {
+
+	//Recupera il numero di Twilio dallla variabile d'ambiente
+	TWILIONUMBER, err := recuperavariabile("TWILIONUMBER")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err.Error())
+		os.Exit(101)
+	}
 
 	//Recupera l'accountsid di Twilio dallla variabile d'ambiente
 	accountSid, err := recuperavariabile("TWILIOACCOUNTSID")
@@ -51,8 +58,8 @@ func Inviasms(to, from, body string) {
 
 	//Valorizza i campi per l'invio del SMS
 	v := url.Values{}
-	v.Set("To", to)     //Esempio: "+393357291532"
-	v.Set("From", from) //Esempio "+17372041296"
+	v.Set("To", to)             //Esempio: "+393357291532"
+	v.Set("From", TWILIONUMBER) //Esempio "+17372041296"
 	v.Set("Body", body)
 
 	//impacchettiamo tutte le variabile insieme

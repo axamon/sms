@@ -27,7 +27,7 @@ func recuperavariabile(variabile string) (result string, err error) {
 }
 
 //Inviasms invia sms via Twilio
-func Inviasms(to, body string) {
+func Inviasms(to, body string) (result string) {
 
 	//Recupera il numero di Twilio dallla variabile d'ambiente
 	TWILIONUMBER, err := recuperavariabile("TWILIONUMBER")
@@ -90,8 +90,10 @@ func Inviasms(to, body string) {
 
 	//controlliamo che ha da dire la response
 	//Restituisce codice e significato, se ricevi 201 CREATED allora è ok.
-	fmt.Println(resp.Status)
+	//fmt.Println(resp.Status)
 
 	//Usciamo con zero che significa tutto ok!
-	os.Exit(0)
+	//a quanto pare un exit qui ammazza anche la funzione padre che lo ha chiamato...
+	//os.Exit(0)
+	return resp.Status
 }

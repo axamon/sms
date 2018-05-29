@@ -33,21 +33,18 @@ func Inviasms(to, body string) (result string) {
 	TWILIONUMBER, err := recuperavariabile("TWILIONUMBER")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err.Error())
-		os.Exit(101)
 	}
 
 	//Recupera l'accountsid di Twilio dallla variabile d'ambiente
 	accountSid, err := recuperavariabile("TWILIOACCOUNTSID")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err.Error())
-		os.Exit(101)
 	}
 
 	//Recupera il token supersegreto dalla variabile d'ambiente
 	authToken, err := recuperavariabile("TWILIOAUTHTOKEN")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err.Error())
-		os.Exit(102)
 	}
 
 	//TODO vedere se riesce a prendere anche le variabili da ambiente windows...
@@ -71,8 +68,7 @@ func Inviasms(to, body string) (result string) {
 	//Creiamo la http request da inviare dopo
 	req, err := http.NewRequest("POST", urlStr, &rb)
 	if err != nil {
-		fmt.Fprintln(os.Stdout, "OH noooo! Qualcosa è andata storta nel creare la richiesta", err)
-		os.Exit(103)
+		fmt.Fprintln(os.Stderr, "OH noooo! Qualcosa è andata storta nel creare la richiesta", err.Error())
 	}
 
 	//Utiliziamo l'autenticazione basic
@@ -84,8 +80,7 @@ func Inviasms(to, body string) (result string) {
 	//Finalmente inviamo la request e salviamo la http response
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Fprintln(os.Stdout, "OH noooo! Qualcosa è andata storta nell'inviare la richiesta", err)
-		os.Exit(104)
+		fmt.Fprintln(os.Stderr, "OH noooo! Qualcosa è andata storta nell'inviare la richiesta", err)
 	}
 
 	//controlliamo che ha da dire la response

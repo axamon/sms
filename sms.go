@@ -12,7 +12,7 @@ import (
 //Verificacellulare si assicura che il cellulare inserito sia nel formato corretto
 func Verificacellulare(CELLULARE string) (ok bool) {
 
-	re := regexp.MustCompile(`^\+3[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$`)
+	re := regexp.MustCompile(`^\+39[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$`)
 	return re.MatchString(CELLULARE)
 
 }
